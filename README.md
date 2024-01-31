@@ -58,10 +58,9 @@ docker rmi nombre_imagen
 ```
 docker build -t nombre_imagen:etiqueta contexto_directorio
 ```
-
 12. Ejemplo de construcción con Dockerfile:
 ```
-docker build -t mi_aplicacion:latest.
+docker build -t mi_aplicacion:latest .
 ```
 
 ## Redes Docker
