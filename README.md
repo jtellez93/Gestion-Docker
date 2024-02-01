@@ -82,5 +82,35 @@ Inspeccionar una red Docker:
 docker network inspect nombre_red
 ```
 
+# Zona horaria Docker
+## Ver zona horaria
+Verificar la zona horaria del sistema dentro del contenedor
+```
+docker exec -it CONTAINER_ID date
+```
+## Actualizar informacion de zona horaria
+El proceso puede variar según la distribución de Linux utilizada en la imagen del contenedor. Por ejemplo, si estás utilizando una imagen basada en Debian/Ubuntu, puedes ejecutar:
+```
+docker exec -it CONTAINER_ID apt-get update
+docker exec -it CONTAINER_ID apt-get install -y tzdata
+```
+Luego, configura la zona horaria:
+```
+docker exec -it CONTAINER_ID dpkg-reconfigure tzdata
+```
+## Configuración de la Zona Horaria en el Dockerfile
+```
+FROM python:3.11.5
+
+# Configura la zona horaria
+ENV TZ=America/Bogota
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+WORKDIR /usr/bin/app
+
+# ... (resto del Dockerfile)
+```
+Esta configuración establece la zona horaria directamente en la imagen durante el proceso de construcción.
+
 Estos son solo algunos de los comandos básicos de Docker. Puedes explorar más opciones y funcionalidades en la documentación oficial de Docker: [Docker Documentation](https://docs.docker.com/).
 
