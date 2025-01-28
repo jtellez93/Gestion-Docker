@@ -80,3 +80,7 @@ minikube dashboard
 ```
 
 Esto abrirá una URL en tu navegador, donde podrás visualizar tus pods, deployments y más, ofreciendo una representación gráfica del funcionamiento interno de Kubernetes.
+
+## Referencias
+- [Minikube start](https://minikube.sigs.k8s.io/docs/start/?arch=%2Fmacos%2Farm64%2Fstable%2Fbinary+download)
+- [Install Tools Kubernetes](https://kubernetes.io/docs/tasks/tools/)
