@@ -8,7 +8,22 @@ docker login <nombre_del_acr>.azurecr.io
 `<nombre_del_acr>.azurecr.io` = Login server del ACR
 Ingresa el nombre de usuario y la contraseña tomados de `Settings -> Access key` en el recurso de Azure (ACR).
 
-### 2. Etiquetar la Imagen:
+### 2. Crear y Etiquetar la Imagen:
+#### Desde macOS (Mac con chip ARM)
+Si construyes la imagen desde un **Mac ARM (M1/M2/M3)** y la vas a usar en **Azure Container Apps**, debes generarla con la plataforma `linux/amd64`, que es la compatible con Azure:
+```bash
+docker buildx build \
+  --platform linux/amd64 \
+  -t login_server/proyecto/nameimage:version \
+  --push \
+  .
+```
+#### Desde Linux/amd64 (o cualquier entorno ya amd64)
+Si estás en una máquina `linux/amd64`, puedes crear la imagen de forma normal:
+```bash
+docker build -t <nombre_imagen>:tag .
+```
+Luego la etiquetas apuntando a tu ACR:
 ```bash
 docker tag <nombre_imagen>:tag login_server/proyecto/nameimage:version
 ```
@@ -17,6 +32,7 @@ Ejemplo:
 docker tag myimage:20210106 myregistry.azurecr.io/samples/myimage:20210106
 ```
 queda etiquetado con el `login server` del ACR, luego un proyecto `samples` luego la imagen y la versión `myimage:20210106`
+
 ### 3. Push de la Imagen a ACR:
 ```bash
 docker push myregistry.azurecr.io/samples/myimage:20210106
